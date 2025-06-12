@@ -69,22 +69,59 @@ export default function LinkDemo() {
     const loanLNodes = atts.filter((doc) => loanLIds.includes(doc.id));
     console.log(loanLNodes);
 
-    const loanLLinks = [
-      { from: "V9iYMhAavyCMzhmQtZxW", to: "ngHSQoTi3OAiQ0ObGu7o" },
-      { from: "ngHSQoTi3OAiQ0ObGu7o", to: "cnyvZvXZGBEshI0lqmP7"},
-      { from: "cnyvZvXZGBEshI0lqmP7", to: "BqbOQQw2D5XZQdeLkMFQ"},
-      { from: "cnyvZvXZGBEshI0lqmP7", to: "4yvkfPYU8JufEUbKsMOI" },
-      { from: "cnyvZvXZGBEshI0lqmP7", to: "PEwPoMvBxRYou9XhRga4" },
-      { from: "ngHSQoTi3OAiQ0ObGu7o", to: "PEwPoMvBxRYou9XhRga4" },
-      { from: "s3inWrhky1qpIgi2CNtu", to: "P2cBsdkdLlCICT87cef4" },
-      { from: "P2cBsdkdLlCICT87cef4", to: "j0QHdEQ9PW37fvtX3EpK" },
-      { from: "j0QHdEQ9PW37fvtX3EpK", to: "asJOrwW5CikTTzqFJwtP" },
-      { from: "j0QHdEQ9PW37fvtX3EpK", to: "vap2yMuP1iGbQNAYChWe" },
-      { from: "j0QHdEQ9PW37fvtX3EpK", to: "1QjRAT1s0bRpt9aQMzQT" },
-      { from: "P2cBsdkdLlCICT87cef4", to: "1QjRAT1s0bRpt9aQMzQT" },
-    ];
+    // const loanLLinks = [
+    //   { from: "V9iYMhAavyCMzhmQtZxW", to: "ngHSQoTi3OAiQ0ObGu7o" },
+    //   { from: "ngHSQoTi3OAiQ0ObGu7o", to: "cnyvZvXZGBEshI0lqmP7"},
+    //   { from: "cnyvZvXZGBEshI0lqmP7", to: "BqbOQQw2D5XZQdeLkMFQ"},
+    //   { from: "cnyvZvXZGBEshI0lqmP7", to: "4yvkfPYU8JufEUbKsMOI" },
+    //   { from: "cnyvZvXZGBEshI0lqmP7", to: "PEwPoMvBxRYou9XhRga4" },
+    //   { from: "ngHSQoTi3OAiQ0ObGu7o", to: "PEwPoMvBxRYou9XhRga4" },
+    //   { from: "s3inWrhky1qpIgi2CNtu", to: "P2cBsdkdLlCICT87cef4" },
+    //   { from: "P2cBsdkdLlCICT87cef4", to: "j0QHdEQ9PW37fvtX3EpK" },
+    //   { from: "j0QHdEQ9PW37fvtX3EpK", to: "asJOrwW5CikTTzqFJwtP" },
+    //   { from: "j0QHdEQ9PW37fvtX3EpK", to: "vap2yMuP1iGbQNAYChWe" },
+    //   { from: "j0QHdEQ9PW37fvtX3EpK", to: "1QjRAT1s0bRpt9aQMzQT" },
+    //   { from: "P2cBsdkdLlCICT87cef4", to: "1QjRAT1s0bRpt9aQMzQT" },
+    // ];
+    const loanLLinks = loanLNodes.flatMap((node) =>
+      Object.entries(node.context || {})
+        .filter(([_, toId]) => loanLIds.includes(toId))
+        .map(([key, toId]) => ({
+          from: node.id,
+          to: toId,
+          label: key,
+        }))
+    );
+
 
     const loanLMermaidDiagram = generateMermaid(loanLNodes, loanLLinks);
+
+
+    const loanMIds = ["aQZmhSNU26EgJqcmuN0Y", "VucshopxzRbqak0lxh0S", "1nrtKTUEJatiWOQ9q5OL", "uyCSEKgizwEHazabxcDj",
+      "JWzyJjc7Ga96j2nkNbCT", "tH4rqLsgRCdjmenFyxTe"
+    ];
+    const loanMNodes = atts.filter((doc) => loanMIds.includes(doc.id));
+    console.log(loanMNodes);
+
+    // const loanMLinks = [
+    //   { from: "aQZmhSNU26EgJqcmuN0Y", to: "VucshopxzRbqak0lxh0S" },
+    //   { from: "VucshopxzRbqak0lxh0S", to: "1nrtKTUEJatiWOQ9q5OL" },
+    //   { from: "1nrtKTUEJatiWOQ9q5OL", to: "uyCSEKgizwEHazabxcDj" },
+    //   { from: "1nrtKTUEJatiWOQ9q5OL", to: "JWzyJjc7Ga96j2nkNbCT" },
+    //   { from: "1nrtKTUEJatiWOQ9q5OL", to: "tH4rqLsgRCdjmenFyxTe" },
+    //   { from: "VucshopxzRbqak0lxh0S", to: "tH4rqLsgRCdjmenFyxTe" },
+    // ];
+    const loanMLinks = loanMNodes.flatMap((node) =>
+      Object.entries(node.context || {})
+        .filter(([_, toId]) => loanMIds.includes(toId))
+        .map(([key, toId]) => ({
+          from: node.id,
+          to: toId,
+          label: key,
+        }))
+    );
+
+    const loanMMermaidDiagram = generateMermaid(loanMNodes, loanMLinks);
 
 
     if (selected === "Loan L") {
@@ -100,6 +137,37 @@ export default function LinkDemo() {
               el.style.cursor = "pointer";
               el.addEventListener("click", () => {
                 setSelectedNode(node.id);
+                container.querySelectorAll("g").forEach((g) => {
+                  const rect = g.querySelector("rect");
+                  if (rect) {
+                    rect.style.stroke = "";
+                    rect.style.strokeWidth = "";
+                    rect.style.fill = "";
+                  }
+                });
+                el.querySelector("rect").style.stroke = "#ff4136";
+                el.querySelector("rect").style.strokeWidth = "4px";
+                el.querySelector("rect").style.fill = "#ffecec";
+
+              });
+            }
+          });
+        });
+      }
+    }
+    if (selected === "Loan M") {
+      const container = document.getElementById("LoanMFlowchart");
+      if (container) {
+        mermaid.render("loanMDiagram", loanMMermaidDiagram).then(({ svg }) => {
+          container.innerHTML = svg;
+
+          // Attach event listeners to nodes
+          loanMNodes.forEach((node) => {
+            const el = container.querySelector(`g[data-id="${node.id}"]`);
+            if (el) {
+              el.style.cursor = "pointer";
+              el.addEventListener("click", () => {
+                setSelectedNode(node.id);
               });
             }
           });
@@ -108,6 +176,28 @@ export default function LinkDemo() {
     }
 
   }, [selected]);
+
+  useEffect(() => {
+  if (selected) {
+    const container = document.getElementById(`${selected.replace(/\s+/g, '')}Flowchart`);
+    if (container) {
+      // Remove existing highlights
+      container.querySelectorAll("g").forEach((g) => {
+        g.classList.remove("selected-node");
+      });
+
+      // Add highlight to selected node
+      if (selectedNode) {
+        const selectedEl = container.querySelector(`g[data-id="${selectedNode}"]`);
+        if (selectedEl) {
+          selectedEl.classList.add("selected-node");
+        }
+      }
+    }
+  }
+}, [selectedNode, selected]);
+
+
 
   return (
     <div style={styles.container}>
