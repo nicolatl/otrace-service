@@ -75,11 +75,13 @@ export default function LinkDemo() {
       { from: "cnyvZvXZGBEshI0lqmP7", to: "BqbOQQw2D5XZQdeLkMFQ"},
       { from: "cnyvZvXZGBEshI0lqmP7", to: "4yvkfPYU8JufEUbKsMOI" },
       { from: "cnyvZvXZGBEshI0lqmP7", to: "PEwPoMvBxRYou9XhRga4" },
+      { from: "ngHSQoTi3OAiQ0ObGu7o", to: "PEwPoMvBxRYou9XhRga4" },
       { from: "s3inWrhky1qpIgi2CNtu", to: "P2cBsdkdLlCICT87cef4" },
       { from: "P2cBsdkdLlCICT87cef4", to: "j0QHdEQ9PW37fvtX3EpK" },
       { from: "j0QHdEQ9PW37fvtX3EpK", to: "asJOrwW5CikTTzqFJwtP" },
       { from: "j0QHdEQ9PW37fvtX3EpK", to: "vap2yMuP1iGbQNAYChWe" },
       { from: "j0QHdEQ9PW37fvtX3EpK", to: "1QjRAT1s0bRpt9aQMzQT" },
+      { from: "P2cBsdkdLlCICT87cef4", to: "1QjRAT1s0bRpt9aQMzQT" },
     ];
 
     const loanLMermaidDiagram = generateMermaid(loanLNodes, loanLLinks);
@@ -157,12 +159,33 @@ export default function LinkDemo() {
         </div>
       </div>
 
+      <div key={"Loan M"} style={styles.emailCard}>
+        <div style={styles.subjectLine}>❌ Loan Application Denied</div>
+        <div style={styles.bodyText}>
+          <p>
+            Dear user, your recent loan application submitted to Fintech F was <b>denied</b>
+            .
+          </p>
+          <p>
+            <a
+              href="#"
+              style={styles.link}
+              onClick={() => {
+                setSelected("Loan M");
+              }}
+            >
+              ➜ See how your data was used and consented
+            </a>
+          </p>
+        </div>
+      </div>
+
 
       {selected && (
         <div style={backdrop}>
           <div style={modal}>
-            <h3>📄 Loan L Traceability Graph</h3>
-            <div id="LoanLFlowchart" style={{ width: "800px", overflow: "auto" }}></div>
+            <h3>📄 {selected} Traceability Graph</h3>
+            <div id={`${selected.replace(/\s+/g, '')}Flowchart`} style={{ width: "800px", overflow: "auto" }}></div>
             <button onClick={() => setSelected(null)} style={buttonStyle}>
               Close
             </button>
