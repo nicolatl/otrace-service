@@ -63,7 +63,8 @@ export default function LinkDemo() {
 
   useEffect(() => {
     const loanLIds = ["V9iYMhAavyCMzhmQtZxW","ngHSQoTi3OAiQ0ObGu7o", "cnyvZvXZGBEshI0lqmP7", "BqbOQQw2D5XZQdeLkMFQ", "4yvkfPYU8JufEUbKsMOI",
-      "PEwPoMvBxRYou9XhRga4"
+      "PEwPoMvBxRYou9XhRga4", "s3inWrhky1qpIgi2CNtu", "P2cBsdkdLlCICT87cef4", "j0QHdEQ9PW37fvtX3EpK", "asJOrwW5CikTTzqFJwtP",
+      "vap2yMuP1iGbQNAYChWe", "1QjRAT1s0bRpt9aQMzQT"
     ];
     const loanLNodes = atts.filter((doc) => loanLIds.includes(doc.id));
     console.log(loanLNodes);
@@ -74,6 +75,11 @@ export default function LinkDemo() {
       { from: "cnyvZvXZGBEshI0lqmP7", to: "BqbOQQw2D5XZQdeLkMFQ"},
       { from: "cnyvZvXZGBEshI0lqmP7", to: "4yvkfPYU8JufEUbKsMOI" },
       { from: "cnyvZvXZGBEshI0lqmP7", to: "PEwPoMvBxRYou9XhRga4" },
+      { from: "s3inWrhky1qpIgi2CNtu", to: "P2cBsdkdLlCICT87cef4" },
+      { from: "P2cBsdkdLlCICT87cef4", to: "j0QHdEQ9PW37fvtX3EpK" },
+      { from: "j0QHdEQ9PW37fvtX3EpK", to: "asJOrwW5CikTTzqFJwtP" },
+      { from: "j0QHdEQ9PW37fvtX3EpK", to: "vap2yMuP1iGbQNAYChWe" },
+      { from: "j0QHdEQ9PW37fvtX3EpK", to: "1QjRAT1s0bRpt9aQMzQT" },
     ];
 
     const loanLMermaidDiagram = generateMermaid(loanLNodes, loanLLinks);
@@ -156,7 +162,7 @@ export default function LinkDemo() {
         <div style={backdrop}>
           <div style={modal}>
             <h3>📄 Loan L Traceability Graph</h3>
-            <div id="LoanLFlowchart"></div>
+            <div id="LoanLFlowchart" style={{ width: "800px", overflow: "auto" }}></div>
             <button onClick={() => setSelected(null)} style={buttonStyle}>
               Close
             </button>
@@ -229,7 +235,7 @@ const modal = {
   backgroundColor: "#fff",
   padding: "2rem",
   borderRadius: "10px",
-  width: "600px",
+  width: "850px",
   maxHeight: "90vh",
   overflowY: "auto",
   boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
